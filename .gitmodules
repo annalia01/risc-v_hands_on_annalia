@@ -1,0 +1,6 @@
+[submodule "UninaSoC"]
+	path = bare_metal/UninaSoC
+	url = https://github.com/MaistoV/UninaSoC.git
+[submodule "bare_metal/UninaSoC"]
+	path = bare_metal/UninaSoC
+	url = https://github.com/MaistoV/UninaSoC
