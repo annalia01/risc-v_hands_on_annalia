@@ -1,6 +1,6 @@
-[submodule "bare_metal/UninaSoC"]
-	path = bare_metal/UninaSoC
+[submodule "UninaSoC/UninaSoC"]
+	path = UninaSoC/UninaSoC
 	url = https://github.com/MaistoV/UninaSoC
-[submodule "bare_metal/common_bm/TinyIO"]
-	path = bare_metal/common_bm/TinyIO
+[submodule "UninaSoC/common_bm/TinyIO"]
+	path = UninaSoC/common_bm/TinyIO
 	url = https://github.com/Granp4sso/TinyIO-library-for-printf-and-scanf-

@@ -99,7 +99,3 @@ _start:
 
 idle: 
     j idle
-
-
-
-

@@ -2,17 +2,27 @@
 # Main #
 ########
 
+#include "tinyIO.h"
+
 # Constant size
 # NOTE: this must be visible in this file
+
 .eqv    SIZE, 5
 
 	.text
 	.align 2
 	.global main
 
-# for printf
-.extern _peripheral_UART_start
-.extern CR_string
+# We' re using the "printf_" function defined in the tinyio.a library.
+# In order to correctly setup the library we need to specify the UART
+# memory-mapped base address in the "tinyIO_init" function.
+# So here we're refering to "_peripheral_UART_start" that is a symbol
+# (defined in the linker script UninaSoC.ld) which is placed in the specified address
+# during linking phase
+# (_peripheral_UART_start = 0x0000000000020000;)
+
+    .extern _peripheral_UART_start
+    .extern format_string
 
 main:
 	# Remember, we want to call this function:
@@ -31,7 +41,8 @@ main:
 	sw	zero, 4(sp)	# At offset 4, store dest
 				# NOTE: this is equivalent to: 
 				#	int dest = 0;
-    # init-printf
+
+    # init-TinyIO
     la a0, _peripheral_UART_start 
     jal tinyIO_init
 	
@@ -51,8 +62,8 @@ main:
 	# - Not necessay for us
 	
 	# Print out result (dest)
-	#lw	a0, 4(sp)
-    la  a0, CR_string
+    # printf_("%d\n", dest)
+    la  a0, format_string
     lw	a1, 4(sp)
     jal printf_
 	

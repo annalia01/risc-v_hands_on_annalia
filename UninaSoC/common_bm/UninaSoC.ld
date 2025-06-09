@@ -47,4 +47,3 @@ SECTIONS
 		_text_end = .;
 	}> BRAM
 }
-

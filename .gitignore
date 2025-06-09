@@ -2,3 +2,4 @@ spike/downloads
 *.o
 *.spike
 *.dis
+*.elf

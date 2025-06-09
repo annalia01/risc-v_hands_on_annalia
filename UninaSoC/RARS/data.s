@@ -6,7 +6,7 @@
 # Statically define our data
 .global vec1
 .global vec2
-.global CR_string
+.global format_string
 
 .data
 	
@@ -26,7 +26,7 @@ vec2:
 	.word 4
 	.word 5
 
-# for print
-CR_string:
-	.string "%d\n"
+# Format for printf_ function
+format_string:
+	.string "%d\r\n"
 
