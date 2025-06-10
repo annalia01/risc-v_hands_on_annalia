@@ -1,5 +1,5 @@
 // substitute stdio with custom printf library
-#include "../common_bm/TinyIO/inc/tinyIO.h"
+#include "tinyIO.h"
 
 // #include <stdio.h>
 
