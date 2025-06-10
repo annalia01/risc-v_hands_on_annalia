@@ -3,22 +3,6 @@
 #   This Makefile defines the project name and paths for the common Makefile.
 #   Optionally, a user can define additional targets here.
 
-#############
-# Toolchain #
-#############
-
-include $(SW_ROOT)/SoC/common/config.mk
-
-###########
-# Targets #
-###########
-
-include $(SW_ROOT)/SoC/common/Makefile
-
-# Extend sources to and ojbect also to assembly files
-# (in $(SW_ROOT)/SoC/common/Makefile SRCS defines only .c files )
-SRCS :=  $(wildcard lib/*.s)
-OBJS := $(addprefix $(OBJ_DIR)/, $(notdir $(basename $(SRCS))).o)
 
 ################
 # Program Name #
@@ -53,5 +37,17 @@ LIB_INC_TINYIO    = -I$(LIB_DIR)/tinyio/inc
 
 LIB_OBJ_LIST     = $(LIB_OBJ_TINYIO)
 LIB_INC_LIST     = $(LIB_INC_TINYIO)
+
+#############
+# Toolchain #
+#############
+
+include $(SW_ROOT)/SoC/common/config.mk
+
+###########
+# Targets #
+###########
+
+include $(SW_ROOT)/SoC/common/Makefile
 
 

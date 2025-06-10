@@ -75,5 +75,6 @@ int main(){
 	// Compare results
 	// assert( dest == dest_asm );
 
-	return 0;
+    while(1);
+	//return 0;
 }
