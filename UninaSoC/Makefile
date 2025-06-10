@@ -40,11 +40,15 @@ gdb_run_asm:
 	$(MAKE) -C $(SOC_HW_DIR) gdb_run ELF_PATH=$(TARGET_DIR_ASM)/bin/dot_prod_asm.elf
 
 hw: 
+	$(MAKE) -C $(SOC_ROOT_DIR) config
 	sudo true && $(MAKE) -C $(SOC_ROOT_DIR) units
 	$(MAKE) -C $(SOC_HW_DIR) ips
 	$(MAKE) -C $(SOC_HW_DIR) bitstream
 
 sw:
+	## Recompile tinyIO (gdb can't see tinyIO symbols using precompiled .a)
+	$(MAKE) -C $(SOC_ROOT_DIR)/sw/SoC/lib/tinyio clean
+	$(MAKE) -C $(SOC_ROOT_DIR)/sw/SoC/lib/tinyio
 	$(MAKE) -C $(SOC_ROOT_DIR) sw
 
 program_bitstream:
