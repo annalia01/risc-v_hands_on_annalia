@@ -12,7 +12,7 @@ init:
 
 install:
 	mkdir -p ${TARGET_DIR} ${TARGET_DIR}/ld ${TARGET_DIR_ASM} ${TARGET_DIR_ASM}/ld
-	ln -s ${CUR_DIR}/src ${TARGET_DIR}/src
+	ln -s ${CUR_DIR}/src ${TARGET_DIR}
 	ln -s ${CUR_DIR}/configs/Makefile ${TARGET_DIR}/Makefile
 	ln -s ${CUR_DIR}/configs/user.ld ${TARGET_DIR}/ld/user.ld
 	ln -s ${CUR_DIR}/src_asm ${TARGET_DIR_ASM}/src
