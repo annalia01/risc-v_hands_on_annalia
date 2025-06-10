@@ -1,1 +1,0 @@
-/home/Salvatore/Progetti/risc-v_hands_on/common/dot_prod_asm.s

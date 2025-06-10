@@ -23,9 +23,11 @@ install:
 	cd $(SOC_ROOT_DIR) && git apply ../configs/asm_compile.patch
 
 clean:
-	$(MAKE) -C $(SOC_ROOT_DIR) clean
-	rm -r ${TARGET_DIR}
-	rm -r ${TARGET_DIR_ASM}
+	-$(MAKE) -C $(SOC_ROOT_DIR) clean
+	-rm -r ${TARGET_DIR}
+	-rm -r ${TARGET_DIR_ASM}
+	-rm src/dot_prod_asm.s
+	-rm src_asm/dot_prod_asm.s
 
 openocd_run:
 	pkill -9 hw_server
