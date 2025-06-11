@@ -1,63 +1,80 @@
 # Project Setup Instructions
 
-Follow these steps to set up and run the project:
+Follow the steps below to set up and run the project:
 
-1. **Initialize the Repository**
-   ```bash
-   make init
-   ```
-   This command clones the UninaSoC submodule.
+### 1. Initialize the Repository
 
-2. **Install Examples**
-   ```bash
-   make install
-   ```
-   This installs the examples into the UninaSoC build system.
+Clone the `UninaSoC` submodule:
 
-3. **Set Environment Variables**
-   Depending on your board version, run one of the following commands:
-   ```bash
-   source UninaSoC/settings.sh embedded nexys_a7_50t
-   ```
-   or
-   ```bash
-   source UninaSoC/settings.sh embedded nexys_a7_100t
-   ```
-   If unspecified, the default board version is `nexys_a7_100t`.
+```bash
+make init
+```
 
-4. **Build the Bitstream**
-   ```bash
-   make hw
-   ```
-   This command builds the bitstream for the hardware.
+### 2. Install Examples
 
-5. **Program the FPGA**
-   ```bash
-   make program_bitstream 
-   ```
-   This command runs the bitstream on FPGA.
+Install the software examples into the build system:
 
+```bash
+make install
+```
 
-6. **Run OpenOCD**
-   ```bash
-   make openocd_run
-   ```
-   This command starts OpenOCD.
+### 3. Set Environment Variables
 
-7. **Compile Examples**
-   ```bash
-   make sw
-   ```
-   This compiles the software examples.
+Choose the appropriate command based on your FPGA board version:
 
-8. **Run C Dot Product Example**
-   ```bash
-   make gdb_run
-   ```
-   This command runs the C dot product example.
+```bash
+source UninaSoC/settings.sh embedded nexys_a7_50t
+```
 
-9. **Run Assembly Dot Product Example**
-   ```bash
-   make gdb_run_asm
-   ```
-   This command runs the assembly dot product example.
+or
+
+```bash
+source UninaSoC/settings.sh embedded nexys_a7_100t
+```
+
+> **Note:** If unspecified, `nexys_a7_100t` is used by default.
+
+### 4. Build Hardware Bitstream
+
+Generate the FPGA bitstream:
+
+```bash
+make hw
+```
+
+### 5. Program the FPGA
+
+Load the bitstream onto the board:
+
+```bash
+make program_bitstream
+```
+
+### 6. Start OpenOCD to debug the examples
+
+Launch OpenOCD:
+
+```bash
+make openocd_run
+```
+
+### 7. Compile Software Examples
+
+Build the C and assembly software examples:
+
+```bash
+make sw
+```
+
+### 8. Run Dot Product Examples using gdb
+
+* **C version:**
+
+  ```bash
+  make gdb_run
+  ```
+* **Assembly version:**
+
+  ```bash
+  make gdb_run_asm
+  ```

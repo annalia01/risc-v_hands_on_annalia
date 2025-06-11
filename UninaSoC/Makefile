@@ -55,11 +55,14 @@ program_bitstream:
 	$(MAKE) -C $(SOC_HW_DIR) start_hw_server
 	$(MAKE) -C $(SOC_HW_DIR) program_bitstream 
 
+
 .PHONY:
 	init
 	install
 	clean
 	openocd_run
 	gdb_run
-
-
+	gdb_run_asm
+	sw
+	hw
+	program_bitstream
