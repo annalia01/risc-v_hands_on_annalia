@@ -8,6 +8,7 @@ SOC_ROOT_DIR = $(CURDIR)/UninaSoC
 init:
 	## Clone UninaSoC
 	cd .. && git submodule update --init --recursive
+	## Temporary patch for HBUS in embedded profile  
 	rm -r ${CUR_DIR}/UninaSoC/hw/xilinx/ips/common/xlnx_highperformance_crossbar
 
 install:
