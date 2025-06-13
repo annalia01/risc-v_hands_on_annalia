@@ -10,7 +10,7 @@
 
 .data
 	
-# Allocate a double words vector with dword macro
+# Allocate a word vector with .word macro
 vec1:
 	.word 1
 	.word 2
@@ -18,7 +18,7 @@ vec1:
 	.word 4
 	.word 5
 
-# Allocate a double words vector with basic directives
+# Allocate a word vector with .word macro
 vec2:	
 	.word 1
 	.word 2
