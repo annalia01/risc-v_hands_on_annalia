@@ -19,7 +19,7 @@ main:
 	# 	our return value on the stack
 	# 2. The third argument of dot_prod_asm, i.e. dest, has to be passed
 	#	by reference, therefore we need to store it somewhere
-	# Hence, we need space for 2 dwords on the stack
+	# Hence, we need space for 2 words on the stack
 	
 	addi	sp, sp, -8	# Make space on the stack for two words
 				# NOTE: the stack grows towards lesser addresses
@@ -55,8 +55,8 @@ main:
 	addi	sp, sp, 8
 	
 	# return 0
-	li	a0, 0
-	ret			# Should call ret here...
+	# li	a0, 0
+	# ret			# Should call ret here...
 
 	# NOTE: since there is no actual caller, calling ret here woulw jump 
 	#	to garbage is in ra
