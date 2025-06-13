@@ -11,7 +11,7 @@ init:
 	## Temporary patch for HBUS in embedded profile  
 	rm -r ${CUR_DIR}/UninaSoC/hw/xilinx/ips/common/xlnx_highperformance_crossbar
 
-install:
+install: init
 	## Install all the src files inside UninaSoC
 	mkdir -p ${TARGET_DIR} ${TARGET_DIR}/ld ${TARGET_DIR_ASM} ${TARGET_DIR_ASM}/ld
 	ln -s ${CUR_DIR}/src ${TARGET_DIR}
