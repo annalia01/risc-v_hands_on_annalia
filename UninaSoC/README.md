@@ -58,6 +58,8 @@ Launch OpenOCD:
 make openocd_run
 ```
 
+> **Note:** This will block the current shell, in order to run the examples (with "make gdb_run" and "make gdb_run_asm", you need to open a new shell and source again the "UninaSoC/settings.sh" file)
+
 ### 7. Compile Software Examples
 
 Build the C and assembly software examples:
@@ -77,4 +79,22 @@ make sw
 
   ```bash
   make gdb_run_asm
+  ```
+
+---
+
+### Additional Commands
+
+* **Clean the build artifacts:**
+
+  ```bash
+  make clean
+  ```
+
+> **Note:** After launching the "make clean" command, you'll need to run again every command listed above, except make init (if you change shell istance, you'll need to source again UninaSoC/settings.sh file)
+
+* **List all available Makefile targets:**
+
+  ```bash
+  make help
   ```

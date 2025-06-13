@@ -76,7 +76,3 @@ main:
 	# return 0
 	li	a0, 0
 	ret			# Should call ret here...
-
-	# NOTE: since there is no actual caller, calling ret here woulw jump 
-	#	to garbage is in ra
-	
