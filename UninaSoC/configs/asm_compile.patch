@@ -4,25 +4,25 @@ index daea26e..529cfbe 100644
 +++ b/sw/SoC/common/Makefile
 @@ -11,7 +11,9 @@ LIB_DIR	= $(SOC_SW_ROOT_DIR)/lib
  ########
- 
+
  SRCS	 = $(wildcard src/*.c) $(wildcard lib/*.c)
 +SRCS_AS	 = $(wildcard src/*.s)
  OBJS	 = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 +OBJS	+= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS_AS:.s=.o)))
- 
+
  RM	  = rm -rf					 # Remove recursively command
  MKDIR   = @mkdir -p $(@D)			 # Creates folders if not present
 @@ -33,11 +35,16 @@ endif
- 
+
  all: bin/$(PROGRAM_NAME).bin
- 
+
 -$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 	
++$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
  	@echo "\n[OBJ] Creating OBJs from src"
  	$(MKDIR)
  	$(CC) -o $@ $^ -I$(INC_DIR) $(LIB_INC_LIST) $(CFLAGS) $(MACRO_LIST)
- 
-+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.s 	
+
++$(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
 +	@echo "\n[OBJ] Creating OBJs from assembly src"
 +	$(MKDIR)
 +	$(CC) -o $@ $^ -I$(INC_DIR) $(LIB_INC_LIST) $(CFLAGS) $(MACRO_LIST)
