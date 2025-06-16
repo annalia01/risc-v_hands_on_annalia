@@ -28,7 +28,7 @@ This tree is structured as follows:
 │       ├── dot_prod.c      # C implementation
 │       └── main.c          # C Main program calling subroutines
 └── UninaSoC
-    ├── configs             # Assets for this examples
+    ├── configs             # Assets to run these examples
     ├── Makefile            # Top Makefile to build SoC and run examples
     ├── README.md           # UninaSoC demo walkthrough
     ├── src                 # Mixed C/assembly example
