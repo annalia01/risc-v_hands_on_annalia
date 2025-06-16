@@ -30,4 +30,4 @@ This tree is structured as follows:
 ```
 
 ## Running the examples
-Move to [RARS](RARS) or [spike](spike) subdirectory to run the related examples.
+Move to [RARS](RARS), [spike](spike) or [UninaSoC](UninaSoC) subdirectory to run the related examples.
