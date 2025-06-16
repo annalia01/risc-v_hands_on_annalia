@@ -34,7 +34,7 @@ git submodule update --init --recursive --depth 1 binutils gcc \
 mkdir build
 cd build
 # NOTE: this is going to take a 2-3 hours....
-../configure --prefix=$INSTALL_DIR/gnu-toolchain --enable-multilib
+../configure --prefix=$INSTALL_DIR/gnu-toolchain --with-arch=rv32gc_zifencei_zicsr --with-abi=ilp32
 make -j $(nproc)
 make install
 
@@ -48,7 +48,7 @@ cd build
 export PATH=$INSTALL_DIR/gnu-toolchain/bin:$PATH 
 # zifencei_zicsr are necessary for GCC>=12
 ../configure --prefix=$INSTALL_DIR/pk \
-    --host=riscv64-unknown-elf \
-    --with-arch=rv64gc_zifencei_zicsr 
+    --host=riscv32-unknown-elf \
+    --with-arch=rv32gc_zifencei_zicsr 
 make
 make install

@@ -1,0 +1,3 @@
+[submodule "UninaSoC/UninaSoC"]
+	path = UninaSoC/UninaSoC
+	url = https://github.com/MaistoV/UninaSoC
