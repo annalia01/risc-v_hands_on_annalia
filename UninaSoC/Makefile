@@ -9,7 +9,7 @@ init:
 	## Clone UninaSoC
 	cd .. && git submodule update --init --recursive
 	## Temporary patch for HBUS in embedded profile  
-	rm -r ${CUR_DIR}/UninaSoC/hw/xilinx/ips/common/xlnx_highperformance_crossbar
+	-rm -r ${CUR_DIR}/UninaSoC/hw/xilinx/ips/common/xlnx_highperformance_crossbar
 
 install: init
 	## Install all the src files inside UninaSoC
@@ -23,18 +23,24 @@ install: init
 	ln -s ${PREV_DIR}/common/dot_prod_asm.s ${TARGET_DIR}/src/dot_prod_asm.s
 	ln -s ${PREV_DIR}/common/dot_prod_asm.s ${TARGET_DIR_ASM}/src/dot_prod_asm.s
 	## Patch to enable compiling for .s files
-	cd $(SOC_ROOT_DIR) && git apply ../configs/asm_compile.patch
+	-cd $(SOC_ROOT_DIR) && git apply ../configs/asm_compile.patch
 
 clean:
 	## Run clean of UninaSoC (need to redo make hw after this)
 	-$(MAKE) -C $(SOC_ROOT_DIR) clean
+	## Delete "dot_prod" directory from UninaSoC examples
 	-rm -r ${TARGET_DIR}
+	## Delete "dot_prod_asm" directory from UninaSoC examples
 	-rm -r ${TARGET_DIR_ASM}
-	-rm src/dot_prod_asm.s
-	-rm src_asm/dot_prod_asm.s
+	## Since "src" and "src_asm" are respectively linked in
+	## "dot_prod/src" and "dot_prod_asm/src" (inside the UninaSoC examples)
+	## when also linking "dot_prod_asm.s" inside "dot_prod/src" and "dot_prod_asm/src"
+	## the link "dot_prod_asm.s" will also appear in the "src" and "src_asm" directories
+	-unlink src/dot_prod_asm.s
+	-unlink src_asm/dot_prod_asm.s
 
 openocd_run:
-	pkill -9 hw_server
+	-pkill -9 hw_server
 	$(MAKE) -C $(SOC_HW_DIR) openocd_run
 
 gdb_run:
@@ -44,10 +50,7 @@ gdb_run_asm:
 	$(MAKE) -C $(SOC_HW_DIR) gdb_run ELF_PATH=$(TARGET_DIR_ASM)/bin/dot_prod_asm.elf
 
 hw: 
-	$(MAKE) -C $(SOC_ROOT_DIR) config
-	sudo true && $(MAKE) -C $(SOC_ROOT_DIR) units
-	$(MAKE) -C $(SOC_HW_DIR) ips
-	$(MAKE) -C $(SOC_HW_DIR) bitstream
+	sudo true && $(MAKE) -C $(SOC_ROOT_DIR) hw
 
 sw:
 	## Recompile tinyIO (gdb can't see tinyIO symbols using precompiled .a)

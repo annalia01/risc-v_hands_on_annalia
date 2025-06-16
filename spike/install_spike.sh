@@ -27,16 +27,16 @@ sudo apt-get install -y autoconf automake autotools-dev curl python3 python3-pip
     libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf \
     libtool patchutils bc zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev
 cd $DOWNLOAD_DIR
-#git clone https://github.com/riscv/riscv-gnu-toolchain.git --depth 1
-#cd riscv-gnu-toolchain
-#git submodule update --init --recursive --depth 1 binutils gcc \
-#                        glibc dejagnu newlib gdb
-#mkdir build
-#cd build
+git clone https://github.com/riscv/riscv-gnu-toolchain.git --depth 1
+cd riscv-gnu-toolchain
+git submodule update --init --recursive --depth 1 binutils gcc \
+                        glibc dejagnu newlib gdb
+mkdir build
+cd build
 # NOTE: this is going to take a 2-3 hours....
-#../configure --prefix=$INSTALL_DIR/gnu-toolchain --enable-multilib
-#make -j $(nproc)
-#make install
+../configure --prefix=$INSTALL_DIR/gnu-toolchain --with-arch=rv32gc_zifencei_zicsr --with-abi=ilp32
+make -j $(nproc)
+make install
 
 # Proxy Kernel
 cd $DOWNLOAD_DIR

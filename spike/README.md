@@ -3,7 +3,7 @@
 ## Installation
 Just source the install script, but also take a look to se what it is doing.
 ``` console
-$ source insall_spike.sh
+$ source install_spike.sh
 ```
 > NOTE: The script also clones and builds GCC for RISC-V, which might take a while.
 
