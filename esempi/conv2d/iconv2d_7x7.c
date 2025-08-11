@@ -60,7 +60,7 @@ void iconv2d_7x7(int64_t *o, int64_t *i, int64_t *f, int64_t M, int64_t N,
     const unsigned long int n_ = MIN(N - n, block_size_n);
 
     // Find pointers to the submatrices
-    const int64_t *i_ = i + n;
+    int64_t *i_ = i + n;
     int64_t *o_ = o + n;
 
     asm volatile("vsetvli zero, %0, e64, m2, ta, ma" ::"r"(n_));
