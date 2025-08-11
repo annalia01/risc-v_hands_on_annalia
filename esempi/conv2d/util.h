@@ -46,7 +46,9 @@
 #define FABS(x) ((x < 0) ? -x : x)
 
 #define FABS(x) ((x < 0) ? -x : x)
+#ifndef MIN
 #define MIN(a, b) ((a) <= (b) ? (a) : (b))
+#endif
 
 // Floating-point similarity check with threshold
 int similarity_check(double a, double b, double threshold);
