@@ -25,8 +25,8 @@ int *__dummy__errno__ptr__;
 unsigned long int timer;
 
 // Floating-point similarity check with threshold
-int similarity_check(double a, double b, double threshold) {
-  double diff = a - b;
+int similarity_check(float a, float b, float threshold) {
+  float diff = a - b;
   if (FABS(diff) > threshold)
     return 0;
   else
