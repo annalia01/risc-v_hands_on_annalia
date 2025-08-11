@@ -49,7 +49,7 @@
 #define MIN(a, b) ((a) <= (b) ? (a) : (b))
 
 // Floating-point similarity check with threshold
-int similarity_check(double a, double b, double threshold);
+int similarity_check(float a, float b, float threshold);
 int similarity_check_32b(float a, float b, float threshold);
 
 // Dummy declaration for libm exp
