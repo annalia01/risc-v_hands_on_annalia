@@ -1,52 +1,29 @@
-# ==== Config di toolchain / architettura ====
-PREFIX ?= riscv64-unknown-elf
-CC     := $(PREFIX)-gcc
-OBJDUMP:= $(PREFIX)-objdump
-OBJCOPY:= $(PREFIX)-objcopy
+# ==== Toolchain e percorsi Spike/PK (come da tue variabili) ====
+CC     := riscv64-unknown-elf-gcc
+SPIKE  := $(HOME)/RISC-V/spike/bin/spike
+PK     := $(HOME)/RISC-V/pk/riscv32-unknown-elf/bin/pk   # meglio rv64 se disponibile
 
-# ISA usata sia a compile-time sia a run-time (Spike)
-MARCH ?= rv64gcv_zicsr_zicntr
-ABI   ?= lp64d
+# ==== ISA/ABI: quelli che abbiamo usato ====
+MARCH  := rv64gcv_zicsr_zicntr
+ABI    := lp64
 
-# ==== Sorgenti / output ====
-PROJECT := main
-SRCS    := main.c fmatmul.c printf.c util.c dataset.c serial.c
-OBJS    := $(SRCS:.c=.o)
-DEPS    := $(OBJS:.o=.d)
+# ==== Flag minimi, solo ciò che serve ====
+CFLAGS := -O2 -march=$(MARCH) -mabi=$(ABI)
 
-# ==== Flag ====
-CFLAGS  ?= -O3 -Wall -Wextra -Wno-unused-parameter -ffast-math -funroll-loops \
-           -march=$(MARCH) -mabi=$(ABI) -I. -MMD -MP
-LDFLAGS ?=
-LDLIBS  ?=
+# ==== Sorgenti/target ====
+TARGET := main.elf
+SRCS   := main.c fmatmul.c printf.c util.c dataset.c serial.c
 
-# ==== Spike / PK ====
-SPIKE ?= spike
-PK    ?= pk
+# ==== Regole ====
+.PHONY: all run clean
 
-# ==== Regole principali ====
-.PHONY: all run dump clean
+all: $(TARGET)
 
-all: $(PROJECT).elf
+$(TARGET): $(SRCS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-$(PROJECT).elf: $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
-# Compilazione oggetti
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-# Esecuzione con Spike + PK
-run: $(PROJECT).elf
-	$(SPIKE) --isa=$(MARCH) $(PK) ./$(PROJECT).elf
-
-# Disassemblato utile per debug
-dump: $(PROJECT).elf
-	$(OBJDUMP) -d -S $< > $(PROJECT).dump
-	@echo "Creato: $(PROJECT).dump"
+run: $(TARGET)
+	"$(SPIKE)" --isa=$(MARCH) "$(PK)" ./$(TARGET)
 
 clean:
-	$(RM) $(OBJS) $(DEPS) $(PROJECT).elf $(PROJECT).dump
-
-# Includi le dipendenze generate da -MMD
--include $(DEPS)
+	$(RM) $(TARGET)
