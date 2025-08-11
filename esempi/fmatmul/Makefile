@@ -1,20 +1,19 @@
-# ==== Toolchain e percorsi Spike/PK (come da tue variabili) ====
+# ==== Toolchain e percorsi ====
 CC     := riscv64-unknown-elf-gcc
-SPIKE  := $(HOME)/RISC-V/spike/bin/spike
-PK     := $(HOME)/RISC-V/pk/riscv32-unknown-elf/bin/pk   # meglio rv64 se disponibile
+SPIKE  := /home/annalia/RISC-V/rv64/spike/bin/spike
+PK     := /home/annalia/RISC-V/rv64/pk/riscv64-unknown-elf/bin/pk
 
-# ==== ISA/ABI: quelli che abbiamo usato ====
+# ==== ISA/ABI ====
 MARCH  := rv64gcv_zicsr_zicntr
 ABI    := lp64
 
-# ==== Flag minimi, solo ciò che serve ====
+# ==== Flag minimi ====
 CFLAGS := -O2 -march=$(MARCH) -mabi=$(ABI)
 
 # ==== Sorgenti/target ====
 TARGET := main.elf
 SRCS   := main.c fmatmul.c printf.c util.c dataset.c serial.c
 
-# ==== Regole ====
 .PHONY: all run clean
 
 all: $(TARGET)
@@ -23,7 +22,7 @@ $(TARGET): $(SRCS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 run: $(TARGET)
-	"$(SPIKE)" --isa=$(MARCH) "$(PK)" ./$(TARGET)
+	$(SPIKE) --isa=$(MARCH) $(PK) ./$(TARGET)
 
 clean:
 	$(RM) $(TARGET)
