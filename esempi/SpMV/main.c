@@ -19,7 +19,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "kernel/spmv.h"
+#include "spmv.h"
 #include "runtime.h"
 #include "util.h"
 
