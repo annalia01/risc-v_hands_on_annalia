@@ -7,22 +7,22 @@ uint64_t N = 128;
 uint64_t P = 128;
 volatile int fake_uart=0;
 // Matrici allocate come array piatti (row-major)
-double a[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
-double b[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
-double c[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
-double g[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+float a[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+float b[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+float c[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+float g[128 * 128] __attribute__((aligned(32 * NR_LANES), section(".l2")));
 
 // Funzione opzionale da richiamare nel main per inizializzare i dati
 void init_dataset() {
   for (uint64_t i = 0; i < M; ++i) {
     for (uint64_t j = 0; j < N; ++j) {
-      a[i * N + j] = (double)(i + j);
+      a[i * N + j] = (float)(i + j);
     }
   }
 
   for (uint64_t i = 0; i < N; ++i) {
     for (uint64_t j = 0; j < P; ++j) {
-      b[i * P + j] = (double)(i == j);  // matrice identità
+      b[i * P + j] = (float)(i == j);  // matrice identità
     }
   }
 
