@@ -301,19 +301,19 @@ static size_t _ntoa_long_long(out_fct_type out, char *buffer, size_t idx,
 
 #if defined(PRINTF_SUPPORT_FLOAT)
 static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
-                    double value, unsigned int prec, unsigned int width,
+                    float value, unsigned int prec, unsigned int width,
                     unsigned int flags) {
   const size_t start_idx = idx;
 
   char buf[PRINTF_FTOA_BUFFER_SIZE];
   size_t len = 0U;
-  double diff = 0.0;
+  float diff = 0.0;
 
   // if input is larger than thres_max, revert to exponential
-  const double thres_max = (double)0x7FFFFFFF;
+  const float thres_max = (float)0x7FFFFFFF;
 
   // powers of 10
-  static const double pow10[] = {1,         10,        100,     1000,
+  static const float pow10[] = {1,         10,        100,     1000,
                                  10000,     100000,    1000000, 10000000,
                                  100000000, 1000000000};
 
@@ -343,7 +343,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
   }
 
   int whole = (int)value;
-  double tmp = (value - whole) * pow10[prec];
+  float tmp = (value - whole) * pow10[prec];
   unsigned long frac = (unsigned long)tmp;
   diff = tmp - frac;
 
@@ -369,7 +369,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
   }
 
   if (prec == 0U) {
-    diff = value - (double)whole;
+    diff = value - (float)whole;
     if ((!(diff < 0.5) || (diff > 0.5)) && (whole & 1)) {
       // exactly 0.5 and ODD, then round up
       // 1.5 -> 2, but 2.5 -> 2
@@ -658,7 +658,7 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
 #if defined(PRINTF_SUPPORT_FLOAT)
     case 'f':
     case 'F':
-      idx = _ftoa(out, buffer, idx, maxlen, va_arg(va, double), precision,
+      idx = _ftoa(out, buffer, idx, maxlen, (float)va_arg(va, double), precision,
                   width, flags);
       format++;
       break;
