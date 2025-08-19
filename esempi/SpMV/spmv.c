@@ -60,7 +60,7 @@ void spmv_csr_idx32(int32_t N_ROW, int32_t *CSR_PROW, int32_t *CSR_INDEX,
         data = data + SLICE_SIZE;
         index = index + SLICE_SIZE;
       }
-      if (len > 0) {
+      while (len > 0) {
         asm volatile("vsetvli zero, %0, e64, m2, ta, ma" ::"r"(len));
         asm volatile("vle64.v v4, (%0)" ::"r"(data));          // fetch entries
         asm volatile("vle32.v v8, (%0)" ::"r"(index));         // fetch indices
@@ -94,7 +94,7 @@ void spmv_csr_idx32(int32_t N_ROW, int32_t *CSR_PROW, int32_t *CSR_INDEX,
         data = data + SLICE_SIZE;
         index = index + SLICE_SIZE;
       }
-      if (len > 0) {
+      while (len > 0) {
         asm volatile("vsetvli zero, %0, e64, m2, ta, ma" ::"r"(len));
         asm volatile("vle64.v v4, (%0)" ::"r"(data));          // fetch entries
         asm volatile("vle32.v v8, (%0)" ::"r"(index));         // fetch indices
