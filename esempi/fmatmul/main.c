@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-#include "fmatmul.h"
+#include "kernel/fmatmul.h"
 #include "runtime.h"
 #include "util.h"
 
@@ -32,24 +32,24 @@
 #else
 #include "printf.h"
 #endif
-#define NR_LANES 8
+
 // Define Matrix dimensions:
 // C = AB with A=[MxN], B=[NxP], C=[MxP]
 extern uint64_t M;
 extern uint64_t N;
 extern uint64_t P;
 
-extern float a[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
-extern float b[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
-extern float c[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+extern double a[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+extern double b[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+extern double c[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
 // Gold results
-extern float g[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
+extern double g[] __attribute__((aligned(32 * NR_LANES), section(".l2")));
 
 #define THRESHOLD 0.001
 
 // Verify the matrix
-int verify_matrix(float *result, float *gold, size_t R, size_t C,
-                  float threshold) {
+int verify_matrix(double *result, double *gold, size_t R, size_t C,
+                  double threshold) {
   for (uint64_t i = 0; i < R; ++i) {
     for (uint64_t j = 0; j < C; ++j) {
       uint64_t idx = i * C + j;
