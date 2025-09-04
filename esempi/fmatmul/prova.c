@@ -84,7 +84,7 @@ static inline void fkm_16xVL_slice_init(void) {
   asm volatile("vmv.v.i v12, 0");
   asm volatile("vmv.v.i v13, 0");
   asm volatile("vmv.v.i v14, 0");
-  asm volatile("vmv.v.i v15, 0");
+  asm volatile("vmv.v.i v15, 0"); 
 }
 
 // Ap: 16×Kc contiguo (ldAp = Kc)
