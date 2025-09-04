@@ -206,7 +206,7 @@ static inline void fkm_16xVL(float* C,       unsigned long ldC, // = P
 // - packing B su Kc × Pc
 // - packing A su 16 × Kc con padding
 //------------------------------------------------------------------------------
-void fmatmul(float *c, const float *a, const float *b,
+void fmatmul(float * restrict c, const float * restrict a, const float * restrict b,
              unsigned long M, unsigned long N, unsigned long P)
 {
   // Scelgo Pc in base a VL (LMUL=1). Una sola vsetvli “max” per sapere VL.
