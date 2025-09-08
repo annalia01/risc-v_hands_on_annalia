@@ -1,10 +1,5 @@
 // Copyright 2020 ETH Zurich and University of Bologna.
 // SPDX-License-Identifier: Apache-2.0
-//
-// Ottimizzazione 2025: packing dei pannelli di A per eliminare i load a stride N.
-// - Si packano blocchi (4|8|16) x N in un buffer contiguo Apack.
-// - I micro-kernel leggono da Apack con 4/8/16 load contigui.
-// - Si mantiene la logica RVV originale (ping-pong su B, stessi accumulatori).
 
 #include "fmatmul.h"
 #include <stddef.h>
