@@ -39,7 +39,7 @@ void fmatmul(float * __restrict c_,
     fmatmul_8x8(c, a, b, M, N, P);
   } else {
     // VL=64; con 4x4 (LMUL=4) ottieni VL effettiva 256
-    fmatmul_4x4_packed(c, a, b, M, N, P);
+    fmatmul_4x4(c, a, b, M, N, P);
   }
 }
 
